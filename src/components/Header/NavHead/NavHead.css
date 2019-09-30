@@ -1,0 +1,28 @@
+nav {
+    background: #4ccfc1;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.75);
+}
+ul {
+    margin: 0;
+    list-style: none;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+li {
+    font-size: 21px;
+    display: inline;
+    padding: 0 20px;
+    border-right: 2px solid #fff;
+}
+li:last-child {
+    border-right: none;
+}
+li a{ 
+    color: #fff;
+    text-transform: uppercase;
+}
+li a:hover{ 
+    color: #fff;
+    text-decoration: none;
+}
