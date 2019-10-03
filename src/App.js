@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Header from './components/Header/Header';
+import Layout from './hoc/Layout/Layout';
+import Quiz from './containers/Quiz/Quiz';
 
 export default class App extends Component {
     constructor(props) {
@@ -9,7 +10,9 @@ export default class App extends Component {
 
     render() {
         return (
-            <Header />
+            <Layout>
+                <Quiz/>
+            </Layout>
         )
     }
 }
