@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import cssClasses from './Layout.module.css';
 import MenuToggle from '../../components/Navigation/MenuToggle/MenuToggle';
 import Drawer from '../../components/Navigation/Drawer/Drawer';
+import { connect } from 'react-redux';
 
-export default class Layout extends Component {
+class Layout extends Component {
     constructor(props) {
         super(props);
         this.state = {
             menu: false
         }
-        this.toggleMenuHandler=this.toggleMenuHandler.bind(this);
+        this.toggleMenuHandler = this.toggleMenuHandler.bind(this);
     }
 
     toggleMenuHandler() {
-        this.setState(prevState =>  {
+        this.setState(prevState => {
             return {
                 menu: !prevState.menu
             }
@@ -23,14 +24,20 @@ export default class Layout extends Component {
     render() {
         return (
             <div className={cssClasses.layout}>
-                <Drawer
-                    isOpen={this.state.menu}
-                    onClose={this.toggleMenuHandler}
-                />
-                <MenuToggle 
-                    isOpen={this.state.menu}
-                    onToggle={this.toggleMenuHandler}
-                />
+                {
+                    this.props.isAuthenticated ?
+                        <div>
+                            <Drawer
+                                isOpen={this.state.menu}
+                                onClose={this.toggleMenuHandler}
+                            />
+                            <MenuToggle
+                                isOpen={this.state.menu}
+                                onToggle={this.toggleMenuHandler}
+                            />
+                        </div> :
+                         null
+                }
                 <main>
                     {this.props.children}
                 </main>
@@ -38,3 +45,11 @@ export default class Layout extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        isAuthenticated: !!state.auth.token
+    }
+}
+
+export default connect(mapStateToProps)(Layout)
